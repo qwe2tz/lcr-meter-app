@@ -1,0 +1,87 @@
+<!-- $Id$
+ *
+ * Red Pitaya lcr client.
+ *
+ * Author: 1nfused <luka.golinar@redpitaya.com>
+ *         
+ * (c) Red Pitaya  http://www.redpitaya.com
+ *
+ * This part of code is written in Javascript & HTML.
+ * Please visit http://en.wikipedia.org/wiki/JavaScript
+ *              http://en.wikipedia.org/wiki/HTML
+ * for more details on the languages used herein.
+-->
+
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<link href="../assets/bootstrap-3.0.0/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="../assets/style.css?6" rel="stylesheet" type="text/css">
+	<title>Lcr Meter</title>
+
+	<script src="../assets/bootstrap-3.0.0/js/jquery.js"></script>
+	<script src="../assets/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+	<script src="../assets/flot/jquery.flot.min.js"></script>
+	<script src="../assets/flot/jquery.flot.selection.min.js"></script>
+	<script src="../assets/flot/jquery.flot.navigate.js"></script>
+	<script src="../assets/flot/jquery.flot.resize.min.js"></script>
+	<script src="../assets/flot/jquery.flot.touch.js?2"></script>
+
+	<!--Connection settings script-->
+	<script src="scripts/settings.js"></script>
+	<script type="text/javascript"></script>
+
+</head>
+
+<body>
+	<div class="header">
+    	<div class="container">
+      		<a id="btn_exit" class="pull-left" href="/index.html"><span class="glyphicon glyphicon-chevron-left" title="Exit" alt="Exit"></span></a>
+      		<img class="logo pull-left" src="../assets/images/logo_white.png">
+      		<h2 class="page-title">Lcr Meter</h2>
+    	</div>
+    </div>
+
+	<!--Container-->
+	<div class="container">
+		<div class="row">
+			<div id="btn_toolbar" class="col-xs-12">
+		        <button id="btn_autoscale_y" class="btn btn-primary btn-lg" data-autozoom="false" onclick="autoscaleY()">
+		          <span class="glyphicon glyphicon-resize-vertical"></span> Autoscale
+		        </button>
+		        <button class="btn btn-primary btn-lg" onclick="resetZoom()">
+		          <span class="glyphicon glyphicon-retweet"></span> Reset zoom
+		        </button>  
+		        <div id="selzoompan" class="btn-group" data-toggle="buttons">
+		          <button id="btn_zoomin" class="btn btn-primary" onclick="selectTool.call(this, 'zoomin')" style="display: none">
+		            <span class="glyphicon glyphicon-zoom-in"></span>
+		          </button>
+		          <button id="btn_zoomout" class="btn btn-default" onclick="selectTool.call(this, 'zoomout')" style="display: none">
+		            <span class="glyphicon glyphicon-zoom-out"></span>
+		          </button>
+		          <button id="btn_pan" class="btn btn-default" onclick="selectTool.call(this, 'pan')" style="display: none">
+		            <span class="glyphicon glyphicon-move"></span>
+		          </button>
+		          <button id="btn_zoompan" class="btn btn-primary btn-lg" onclick="selectTool.call(this, 'zoompan')" style="display: none">
+		            <span class="glyphicon glyphicon-search"></span><span class="glyphicon glyphicon-move"></span>
+		          </button>
+		        </div>
+	        	<button id="btn_ref_meas" class="btn btn-primary btn-lg" data-checked="true" onclick="showLastMeasure()">Show last measure</button>
+	      	</div>
+
+			<!--Graph holder-->
+			<div class="col-xs-12 col-sm-12 col-md-8">
+				<div class="graph-holder well well-small">
+				  <div id="ytitle"></div>
+				  <div id="plot_holder"></div>
+				  <div id="xtitle"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
