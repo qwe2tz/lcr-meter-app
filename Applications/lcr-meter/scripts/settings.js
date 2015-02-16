@@ -6,7 +6,8 @@
 //settings which can be modified
 
 var app_id = 'lcr_meter';  
-var root_url = '';
+var root_url = '192.168.1.100';
+var root_port = '';
 //var root_url = 'http://10.0.1.221';      // Test local
 //var root_url = 'http://192.168.53.133';  // Test remote and local
 //var root_url = 'http://192.168.1.100';   // Default RedPitaya IP
@@ -16,11 +17,11 @@ var get_url = root_url + '/data';
 var post_url = root_url + '/data';
 
 var plot_options = {
-	colors: ['#3276B1', '#D2322D'], //Channel 1, Channel 2 - Reference channel
+	colors: ['#3276B1'], //Channel 1, Channel 2 - Reference channel
 	lines: { lineWidth: 1 },
 	selectin: { mode: 'xy' },
 	zoom: { interactive: true, trigger: null },
-	xaxis: { min: 10, max: 10000000 },
+	xaxis: { min: 0, max: 10 },
     grid: { borderWidth: 0 },
     legend: { noColumns: 2, margin: [0, 0], backgroundColor: 'transparent' },
     touch: { autoWidth: false, autoHeight: false }

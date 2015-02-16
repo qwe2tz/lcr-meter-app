@@ -31,10 +31,22 @@ $(function() {
 });
 
 //Web socket connection
+var connection = new WebSocket('ws://' + root_url + root_port, 'redpitaya-data');
+connection.binaryType = "arraybuffer";
 
-var connection = new WebSocket('ws://192.168.128.1:8080', 'redpitaya-data');
-conn.binaryType = "arraybuffer";
+//temp var
+var dummy_data = [];
 
-conn.onopen = function() {
-    conn.send(sigLen)
+//Init plot function
+$(function init_plot(){
+	var plot_holder = $('#plot_holder');
+
+	plot = $.plot(plot_holder, 
+      [dummy_data],
+      plot_options
+    );
+});
+
+connection.onopen = function() {
+    connection.send(sigLen)
 };
