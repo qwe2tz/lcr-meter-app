@@ -58,6 +58,7 @@ const char *rp_app_desc(void);
 int lcr_app_init(void);
 int lcr_app_exit(void);
 int lcr_set_params(rp_app_params_t *params, int param_len);
+int lcr_copy_params(rp_app_params_t *src, rp_app_params_t **dst);
 int lcr_get_params(rp_app_params_t **p);
 int lcr_get_signals(float ***s, int *sig_num, int *sig_len);
 

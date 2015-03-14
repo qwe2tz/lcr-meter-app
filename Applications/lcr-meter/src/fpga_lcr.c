@@ -96,10 +96,8 @@ int lcr_fpga_init(void){
     }
 
     g_osc_fpga_reg_mem = page_ptr + page_off;
-    g_osc_fpga_cha_mem = (uint32_t *)g_osc_fpga_reg_mem + 
-        (OSC_FPGA_CHA_OFFSET / sizeof(uint32_t));
-    g_osc_fpga_chb_mem = (uint32_t *)g_osc_fpga_reg_mem + 
-        (OSC_FPGA_CHB_OFFSET / sizeof(uint32_t));
+    g_osc_fpga_cha_mem = (uint32_t *)g_osc_fpga_reg_mem + (OSC_FPGA_CHA_OFFSET / sizeof(uint32_t));
+    g_osc_fpga_chb_mem = (uint32_t *)g_osc_fpga_reg_mem + (OSC_FPGA_CHB_OFFSET / sizeof(uint32_t));
 
     return 0;
 }

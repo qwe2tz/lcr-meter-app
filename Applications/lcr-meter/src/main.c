@@ -14,7 +14,9 @@
 
 #include "main.h"
 #include "worker.h"
+#include "common.h"
 #include "version.h"
+
 
 /* Describe app. parameters with some info/limitations */
 pthread_mutex_t lcr_main_params_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -123,7 +125,7 @@ int lcr_set_params(rp_app_params_t *params, int param_len){
 
 	if(param_len > PARAMS_NUM){
 		fprintf(stderr, "Too many parameters, max=%d\n", PARAMS_NUM);
-		return -1;
+		return RP_ERRNO;
 	}
 	pthread_mutex_lock(&lcr_main_params_mutex);
 	for (i = 0; i < param_len || params[i].name != NULL; i++){
@@ -170,6 +172,49 @@ int lcr_set_params(rp_app_params_t *params, int param_len){
 		pthread_mutex_unlock(&lcr_main_params_mutex);
 	}
 
-	return 0;
+	return RP_OK;
+}
+
+int lcr_copy_params(rp_app_params_t *src, rp_app_params_t **dst){
+
+  rp_app_params_t *p_new = *dst;
+  int i;
+
+  if(src == NULL){
+    fprintf(stderr, "Main parameters not defined!\n");
+    return RP_ERRNO;
+  }
+
+   /* check if destination buffer is allocated or not */
+  if(dst == NULL){
+
+    i = 0;
+    /* allocate array of parameter entries, parameter names must be allocated separately */
+    p_new = (rp_app_params_t *)malloc(sizeof(rp_app_params_t) * (PARAMS_NUM));
+
+    if(p_new == NULL) {
+      fprintf(stderr, "Memory problem, the destination buffer could not be allocated.\n");
+      return RP_ERRNO;
+    }
+
+    while(src[i].name != NULL){
+      p_new[i].name = (char *)malloc(strlen(src[i].name)+1);
+      
+      if(p_new[i].name == NULL)
+        return RP_ERRNO;
+
+      strncpy(p_new[i].name, src[i].name, strlen(src[i].name));
+      p_new[i].name[strlen(src[i].name)]='\0';
+      p_new[i].value = src[i].value;
+      i++;
+    }
+
+    /* mark last one */
+    p_new[PARAMS_NUM].name = NULL;
+    p_new[PARAMS_NUM].value = -1;
+    
+  }
+
+  return RP_OK;
 }
 
